@@ -3,16 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
 
 
-    <groupId>org.technbolts</groupId>
+    <groupId>com.github.moritzfl</groupId>
     <artifactId>gutenberg</artifactId>
-    <version>1.3.0-SNAPSHOT</version>
+    <version>1.3.1</version>
 
     <licenses>
         <license>
@@ -27,25 +22,23 @@
             <name>Arnauld Loyer</name>
             <email>arnauld.loyer@gmail.com</email>
         </developer>
+        <developer>
+            <name>Moritz Flöter</name>
+            <email>moritzf@gmail.com</email>
+        </developer>
     </developers>
 
-    <scm>
-        <connection>scm:git:git@github.com:Arnauld/gutenberg.git</connection>
-        <developerConnection>scm:git:git@github.com:Arnauld/gutenberg.git</developerConnection>
-        <url>git@github.com:Arnauld/gutenberg.git</url>
-        <tag>HEAD</tag>
-    </scm>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- Properties -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <properties>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <junit.version>4.11</junit.version>
-        <itext.version>5.4.4</itext.version>
+        <itext.version>5.5.13</itext.version>
     </properties>
 
 
@@ -61,6 +54,15 @@
             <groupId>org.pegdown</groupId>
             <artifactId>pegdown</artifactId>
             <version>1.5.0</version>
+        </dependency>
+
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <!-- LaTeX -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <dependency>
+            <groupId>org.scilab.forge</groupId>
+            <artifactId>jlatexmath</artifactId>
+            <version>1.0.7</version>
         </dependency>
 
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -275,7 +277,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.8.1</version>
+                <version>3.0.1</version>
+                <configuration>
+                    <source>8</source>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -284,12 +289,13 @@
                         </goals>
                     </execution>
                 </executions>
+
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.3</version>
+                <version>2.5.3</version>
                 <configuration>
                     <localCheckout>true</localCheckout>
                     <pushChanges>false</pushChanges>
@@ -299,67 +305,9 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.1</version>
-            </plugin>
-            
-            <plugin>
-                <artifactId>maven-scm-plugin</artifactId>
-                <version>1.8.1</version>
-                <configuration>
-                    <tag>${project.artifactId}-${project.version}</tag>
-                </configuration>
+                <version>2.7</version>
             </plugin>
 
         </plugins>
     </build>
-
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!-- Reporting -->
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jdepend-maven-plugin</artifactId>
-                <version>2.0</version>
-            </plugin>
-        </plugins>
-    </reporting>
-
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!-- PROFILES -->
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <profiles>
-        <profile>
-            <id>sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.4</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <keyname>9E5867B7</keyname>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>

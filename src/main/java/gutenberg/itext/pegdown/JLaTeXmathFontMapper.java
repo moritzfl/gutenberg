@@ -56,7 +56,9 @@ public class JLaTeXmathFontMapper implements FontMapper {
                 "/org/scilab/forge/jlatexmath/fonts/latin/",
                 "/org/scilab/forge/jlatexmath/fonts/latin/optional",
                 "/org/scilab/forge/jlatexmath/fonts/base/",
-                "/org/scilab/forge/jlatexmath/fonts/euler/")) {
+                "/org/scilab/forge/jlatexmath/fonts/euler/",
+                "/org/scilab/forge/jlatexmath/cyrillic/fonts",
+                "/org/scilab/forge/jlatexmath/greek/fonts")) {
             String name = basePath + fontName + ".ttf";
             InputStream stream = getClass().getResourceAsStream(name);
             if (stream != null)
